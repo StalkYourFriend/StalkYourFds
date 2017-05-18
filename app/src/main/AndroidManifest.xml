@@ -27,6 +27,7 @@
             android:label="Register"
             android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".StalkActivity"></activity>
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ab-sdk-beta1.6.7">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/ab-sdk-beta1.6.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
