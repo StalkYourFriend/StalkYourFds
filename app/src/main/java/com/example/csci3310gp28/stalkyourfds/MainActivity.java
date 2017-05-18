@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,10 +19,16 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.Vector;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
+
+    final int[] ICONS = new int[] {
+            R.drawable.ic_people_black_24dp,
+            R.drawable.ic_chat_black_24dp,
+            R.drawable.ic_person_black_24dp
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +46,14 @@ public class MainActivity extends FragmentActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        for (int i=0; i<tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            Drawable icon = getResources().getDrawable(ICONS[i],getTheme());
+            if (icon != null) {
+                icon.mutate();
+                icon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.primary_light), PorterDuff.Mode.SRC_ATOP);
+            }
+        }
 
 //        viewPager = (ViewPager) findViewById(R.id.viewPager);
 //        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
@@ -55,39 +72,5 @@ public class MainActivity extends FragmentActivity {
 //        }
 //
 //        viewPager.setCurrentItem(1);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.stalk, menu);
-        // Set menu item to have white color
-        setMenuItemColor(menu, R.id.menu_add, Color.WHITE);
-        setMenuItemColor(menu, R.id.menu_logout, Color.WHITE);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.menu_add:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /**
-     * Set color for the specified menu item.
-     * @param menu is the menu the item is located at
-     * @param res is the resource ID of the menu item
-     * @param color is the color of the item
-     */
-    private void setMenuItemColor(Menu menu, int res, int color) {
-        Drawable icon = menu.findItem(res).getIcon();
-        if(icon != null) {
-            icon.mutate();
-            icon.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-        }
     }
 }

@@ -1,14 +1,20 @@
 package com.example.csci3310gp28.stalkyourfds;
 
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -64,7 +70,9 @@ public class FdListFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         /*
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -98,6 +106,40 @@ public class FdListFragment extends Fragment {
             Log.e(TAG, "Error: FdListView not found");
         }
 
+        setHasOptionsMenu(true);
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main, menu);
+        // Set menu item to have white color
+        setMenuItemColor(menu, R.id.menu_add, Color.WHITE);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_add:
+                Toast.makeText(getActivity(), "Add friend", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * Set color for the specified menu item.
+     * @param menu is the menu the item is located at
+     * @param res is the resource ID of the menu item
+     * @param color is the color of the item
+     */
+    private void setMenuItemColor(Menu menu, int res, int color) {
+        Drawable icon = menu.findItem(res).getIcon();
+        if(icon != null) {
+            icon.mutate();
+            icon.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        }
     }
 }

@@ -19,28 +19,11 @@ public class CustomPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return tabTitles[position];
+        return null;
     }
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment;
-
-//        switch(position) {
-//            case 0:
-//                fragment = new FdListFragment();
-//                break;
-//            case 1:
-//                fragment = new FdListFragment();
-//                break;
-//            case 2:
-//                fragment = new FdListFragment();
-//                break;
-//            default:
-//                fragment = null;
-//                break;
-//        }
-
         return mFragments.get(position);
     }
 
