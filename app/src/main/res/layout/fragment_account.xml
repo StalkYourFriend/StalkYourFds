@@ -1,51 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical"
-    tools:context="com.example.csci3310gp28.stalkyourfds.RegisterActivity">
-
-    <TextView
-        android:id="@+id/ac_username_tv"
+    tools:context="com.example.csci3310gp28.stalkyourfds.AccountFragment">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="16dp"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:hint="Username"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/ac_password_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:inputType="textPassword"
-        android:padding="16dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/primary_text"
-        android:hint="New password"/>
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@color/accent"
+            android:layout_gravity="center_horizontal"
+            />
 
-    <Button
-        android:id="@+id/ac_submit_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:backgroundTint="@color/primary"
-        android:padding="16dp"
-        android:textColor="@color/icons"/>
+        <TextView
+            android:id="@+id/ac_username_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:paddingTop="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:hint="Username"/>
 
-    <Button
-        android:id="@+id/ac_logout_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:backgroundTint="@color/accent"
-        android:padding="16dp"
-        android:textColor="@color/icons"/>
+        <EditText
+            android:id="@+id/ac_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:inputType="textPassword"
+            android:padding="16dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text"
+            android:hint="New password"/>
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/ac_icon_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text"
+            android:hint="Profile picture URL"/>
+
+        <Button
+            android:id="@+id/ac_submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:backgroundTint="@color/primary"
+            android:padding="16dp"
+            android:textColor="@color/icons"/>
+
+        <Button
+            android:id="@+id/ac_logout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:backgroundTint="@color/accent"
+            android:padding="16dp"
+            android:textColor="@color/icons"/>
+
+    </LinearLayout>
+</ScrollView>
