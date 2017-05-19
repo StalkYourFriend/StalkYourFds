@@ -5,7 +5,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,18 +13,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class StalkActivity extends AppCompatActivity {
+public class FdListActivity extends AppCompatActivity {
 
-    private static final String TAG = StalkActivity.class.getSimpleName();
+    private static final String TAG = FdListActivity.class.getSimpleName();
     private FdListAdapter mFdListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stalk);
+        setContentView(R.layout.fragment_fd_list);
 
         // Set up friends ListView
-        ListView fdsListView = (ListView) findViewById(R.id.friend_listview);
+        ListView fdsListView = (ListView) findViewById(R.id.friend_listview_activity);
 
         // TEMP dummy friend list
         ArrayList<Friend> fds = new ArrayList<>();

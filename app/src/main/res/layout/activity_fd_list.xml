@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.csci3310gp28.stalkyourfds.StalkActivity">
+    tools:context="com.example.csci3310gp28.stalkyourfds.FdListActivity">
     <ListView
-        android:id="@+id/friend_listview"
+        android:id="@+id/friend_listview_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>

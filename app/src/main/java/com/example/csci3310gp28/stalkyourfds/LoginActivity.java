@@ -1,40 +1,40 @@
 package com.example.csci3310gp28.stalkyourfds;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText mUsername;
+
+    TextView registerLink;
+    Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
-        mUsername = (EditText) findViewById(R.id.login_username_et);
-    }
+        // Go to register screen
+        registerLink = (TextView) findViewById(R.id.login_register_tv);
+        registerLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(registerIntent);
+            }
+        });
 
-    public void joinChat(View view) {
-        String username = mUsername.getText().toString();
-
-        if (!isValid(username)) {
-            return;
-        }
-
-        SharedPreferences sp = getSharedPreferences(Constants.DATASTREAM_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor edit = sp.edit();
-        edit.putString(Constants.DATASTREAM_UUID, username);
-        edit.apply();
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    private static boolean isValid(String username) {
-        return username.matches("^[a-zA-Z0-9_]+$");
+        // TEMPORARY Go to stalk screen
+        loginBtn = (Button) findViewById(R.id.login_btn);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(loginIntent);
+            }
+        });
     }
 }

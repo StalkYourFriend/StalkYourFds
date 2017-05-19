@@ -5,57 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical"
-    tools:context="com.example.csci3310gp28.stalkyourfds.MainActivity">
+    android:layout_below="@+id/appbar"
+    android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_place_black_24dp"
-        android:tint="@color/primary"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
+        android:scrollbars="none" />
 
-    <EditText
-        android:id="@+id/login_username_et"
-        android:hint="Username"
-        android:inputType="text"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/sliding_tabs"
+        style="@style/CustomTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/primary_text"
-        />
-
-    <EditText
-        android:id="@+id/login_password_et"
-        android:fontFamily="sans-serif"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/primary_text" />
-
-    <Button
-        android:backgroundTint="@color/primary"
-        android:id="@+id/login_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Login"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/icons"/>
-
-    <TextView
-        android:id="@+id/login_register_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Register"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/primary" />
+        app:tabMode="fixed" />
 
 </LinearLayout>

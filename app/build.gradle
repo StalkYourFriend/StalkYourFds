@@ -40,7 +40,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
-    testCompile 'junit:junit:4.12'
     compile 'com.android.volley:volley:1.0.0'
     compile group: 'com.pubnub', name: 'pubnub', version: '4.0.5'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.7.3'
@@ -49,4 +48,6 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
     compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
 
+    compile 'com.android.support:support-v4:25.3.1'
+    testCompile 'junit:junit:4.12'
 }

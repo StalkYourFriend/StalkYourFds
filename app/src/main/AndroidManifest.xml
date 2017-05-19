@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,9 +25,11 @@
         <activity
             android:name=".RegisterActivity"
             android:label="Register"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".LoginActivity"></activity>
         <activity android:name=".StalkActivity"></activity>
         <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".FdListActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
