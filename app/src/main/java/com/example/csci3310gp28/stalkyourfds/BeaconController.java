@@ -1,4 +1,4 @@
-package com.example.kalok.testbeacon;
+package com.example.csci3310gp28.stalkyourfds;
 
 import android.app.Activity;
 import android.content.Intent;
