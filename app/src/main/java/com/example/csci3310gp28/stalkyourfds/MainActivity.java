@@ -1,8 +1,10 @@
 package com.example.csci3310gp28.stalkyourfds;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -21,8 +23,8 @@ import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
 
     final int[] ICONS = new int[] {
             R.drawable.ic_people_black_24dp,
@@ -40,18 +42,27 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(Fragment.instantiate(this, ChatroomFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, AccountFragment.class.getName()));
 
-        CustomPagerAdapter pageAdapter = new CustomPagerAdapter(getSupportFragmentManager(), fragments);
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        viewPager.setAdapter(pageAdapter);
+        ColorStateList colors;
+        if (Build.VERSION.SDK_INT >= 23) {
+            colors = getResources().getColorStateList(R.color.tab_icon, getTheme());
+        }
+        else {
+            colors = getResources().getColorStateList(R.color.tab_icon);
+        }
 
-        tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
-        for (int i=0; i<tabLayout.getTabCount(); i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
-            Drawable icon = getResources().getDrawable(ICONS[i],getTheme());
+        CustomPagerAdapter pageAdapter = new CustomPagerAdapter(getSupportFragmentManager(), fragments);
+        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mViewPager.setAdapter(pageAdapter);
+
+        mTabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
+        for (int i=0; i<mTabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = mTabLayout.getTabAt(i);
+            tab.setIcon(ICONS[i]);
+            Drawable icon = tab.getIcon();
             if (icon != null) {
-                icon.mutate();
-                icon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.primary_light), PorterDuff.Mode.SRC_ATOP);
+                icon = DrawableCompat.wrap(icon);
+                DrawableCompat.setTintList(icon, colors);
             }
         }
 
