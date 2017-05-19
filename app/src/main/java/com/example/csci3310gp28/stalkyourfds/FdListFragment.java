@@ -2,7 +2,10 @@ package com.example.csci3310gp28.stalkyourfds;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -18,14 +21,23 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FdListFragment#newInstance} factory method to
+ * Use the {@link FdListFragment} factory method to
  * create an instance of this fragment.
  */
 public class FdListFragment extends Fragment {
@@ -56,8 +68,6 @@ public class FdListFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment FdListFragment.
      */
     /*
@@ -71,12 +81,20 @@ public class FdListFragment extends Fragment {
         return fragment;
     }
     */
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
+        // TODO replace TEMP dummy friend list with the actual one
+        fds = new ArrayList<>();
+//        fds.add(new Friend("Aaron", null, "SHB 123"));
+//        fds.add(new Friend("Energy", null, "SHB 123"));
+//        fds.add(new Friend("Kalok", null, "SHB 123"));
+//        fds.add(new Friend("No", null, "SHB 123"));
+//        fds.add(new Friend("Joker", null, "SHB 924"));
+//        fds.add(new Friend("Sam", null, "SHB 924"));
+//        fds.add(new Friend("DR S.H.OR", "http://appsrv.cse.cuhk.edu.hk/~shor/index_files/image003.jpg", "SHB 127"));
         /*
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -84,15 +102,61 @@ public class FdListFragment extends Fragment {
         }
         */
 
-        // TODO replace TEMP dummy friend list with the actual one
-        fds = new ArrayList<>();
-        fds.add(new Friend("Aaron", null, "SHB 123"));
-        fds.add(new Friend("Energy", null, "SHB 123"));
-        fds.add(new Friend("Kalok", null, "SHB 123"));
-        fds.add(new Friend("No", null, "SHB 123"));
-        fds.add(new Friend("Joker", null, "SHB 924"));
-        fds.add(new Friend("Sam", null, "SHB 924"));
-        fds.add(new Friend("DR S.H.OR", "http://appsrv.cse.cuhk.edu.hk/~shor/index_files/image003.jpg", "SHB 127"));
+//        final String username = ((TextView) findViewById(R.id.register_username_et)).getText().toString();
+//        String password = ((TextView) findViewById(R.id.register_password_et)).getText().toString();
+//        String icon = ((TextView) findViewById(R.id.register_icon_et)).getText().toString();
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+
+        long id = sharedPref.getLong("id", 1);
+        String url = "http://5d8ba069.ngrok.io/users/" + id + "/friends";
+        JSONObject request = new JSONObject();
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET, url, request, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(this.getClass().getSimpleName(), "Response: " + response.toString());
+                        //display successful msg
+                        Context context = getActivity().getApplicationContext();
+                        CharSequence text = "Successfully loaded friends!";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        try {
+                            for (int i = 0; i < response.getJSONArray("data").length(); i++) {
+                                String name = response.getJSONArray("data").getJSONObject(i).getJSONObject("attributes").getString("full-name");
+                                String icon = response.getJSONArray("data").getJSONObject(i).getJSONObject("attributes").getString("icon");
+                                String location = response.getJSONArray("data").getJSONObject(i).getJSONObject("attributes").getString("location");
+                                fds.add(new Friend(name, icon.equals("null") ? null : icon, location));
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        ((FdListAdapter) mFdListView.getAdapter()).notifyDataSetChanged();
+                        mFdListView.invalidateViews();
+                        mFdListView.refreshDrawableState();
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //display failed msg
+                        Context context = getActivity().getApplicationContext();
+                        CharSequence text = "Failed to load friend list: " + new String(error.networkResponse.data) + "(" + error.networkResponse.statusCode + ")";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+
+                    }
+                });
+        // Access the RequestQueue through your singleton class.
+        MySingleton.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
+
+
     }
 
     @Override
@@ -103,8 +167,9 @@ public class FdListFragment extends Fragment {
 
         // Set up FdListAdapter on the friends ListView
         mFdListView = (ListView) rootView.findViewById(R.id.friend_listview);
-        if(mFdListView != null) {
+        if (mFdListView != null) {
             mFdListAdapter = new FdListAdapter(getActivity(), fds);
+
             mFdListView.setAdapter(mFdListAdapter);
         } else {
             Log.e(TAG, "Error: FdListView not found");
@@ -119,12 +184,12 @@ public class FdListFragment extends Fragment {
         inflater.inflate(R.menu.main, menu);
         // Set menu item to have white color
         setMenuItemColor(menu, R.id.menu_add, Color.WHITE);
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menu_add:
                 //Toast.makeText(getActivity(), "Add friend", Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder addFdDialog = buildAddFdDialog();
@@ -137,13 +202,14 @@ public class FdListFragment extends Fragment {
 
     /**
      * Set color for the specified menu item.
-     * @param menu is the menu the item is located at
-     * @param res is the resource ID of the menu item
+     *
+     * @param menu  is the menu the item is located at
+     * @param res   is the resource ID of the menu item
      * @param color is the color of the item
      */
     private void setMenuItemColor(Menu menu, int res, int color) {
         Drawable icon = menu.findItem(res).getIcon();
-        if(icon != null) {
+        if (icon != null) {
             icon.mutate();
             icon.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
         }
@@ -151,6 +217,7 @@ public class FdListFragment extends Fragment {
 
     /**
      * Construct the dialog for adding friends.
+     *
      * @return dialog with username input and buttons
      */
     private AlertDialog.Builder buildAddFdDialog() {
