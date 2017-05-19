@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="D:\CS\csci3310\pj\app\libs\ab-sdk-beta1.6.7.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="086b3a2ba4afa34a9cb950ea86fc503b79cf85f8">
+        <dex dex="D:\CS\csci3310\pj\app\build\intermediates\transforms\dex\debug\folders\1000\2\ab-sdk-beta1.6.7_1a062298e3410ef9a0689d86ece0ec3d3d71fb55\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\CS\csci3310\pj\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2be55553898aa9a7745838517a3e6e30465ffed5">
+        <dex dex="D:\CS\csci3310\pj\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_4940173789346a82ffd33229dc73f50587d47a61\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\CS\csci3310\pj\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="12920f9016b8b05acbc2af7cdc13cef6946fe7d3">
+        <dex dex="D:\CS\csci3310\pj\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_f9c43d0def4d73fd60160e5b0d11b1d22e98fb01\classes.dex" />
+    </item>
+
+</items>

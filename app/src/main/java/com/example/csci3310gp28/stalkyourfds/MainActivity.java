@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private List<Fragment> mFragments;
+    private BeaconController bc;
+    private String location;
 
     final int[] ICONS = new int[] {
             R.drawable.ic_people_black_24dp,
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         CallbackInterface cbi = new CallbackInterface() {
             @Override
             public void onRanged(ArrayList<Beacon> beacons) {
-                int id = -1;
+                /*int id = -1;
                 for(int i = 0;i < beacons.size();i++){
                     Beacon b = beacons.get(i);
                     if(b.getDistance() < 10){
@@ -95,7 +97,26 @@ public class MainActivity extends AppCompatActivity {
                             updateLocation("Outside lab");
                         }
                     }
+                }*/
+                location = "";
+                if(beacons.size() > 0) {
+                    Beacon nearestBeacon = bc.getClosestBeacon(beacons);
+                    if(nearestBeacon.getDistance() < 10){
+                        if(nearestBeacon.getName().equals("abeacon_C775")){
+                            location = "SHB123";
+                        }else if(nearestBeacon.getName().equals("abeacon_C7FC")){
+                            location = "SHB924";
+                        }else{
+                            location = "Outside Lab";
+                        }
+                    }else{
+                        location = "Outside Lab";
+                    }
+                }else{
+                    location = "Outside Lab";
                 }
+
+                updateLocation(location);
             }
             @Override
             public void onEntered(ArrayList<Beacon> beacons) {
@@ -105,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             public void onExit() {
             }
         };
-        BeaconController bc = new BeaconController(this,cbi);
+        bc = new BeaconController(this,cbi);
         bc.connectToService();
 
 //        viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -134,5 +155,9 @@ public class MainActivity extends AppCompatActivity {
     public void updateLocation(String location){
         TextView locationTV = (TextView) mFragments.get(1).getView().findViewById(R.id.chat_location_tv);
         locationTV.setText(location);
+    }
+
+    public String getLocation(){
+        return location;
     }
 }
