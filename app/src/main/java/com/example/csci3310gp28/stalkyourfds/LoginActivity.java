@@ -84,6 +84,13 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("username", username);
 
+                                long id;
+                                try {
+                                    id=response.getJSONObject("data").getLong("id");
+                                    editor.putLong("id", id);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                                 // Commit the edits!
                                 editor.apply();
                                 Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
