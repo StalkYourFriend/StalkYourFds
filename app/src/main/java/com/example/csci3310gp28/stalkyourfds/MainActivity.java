@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
     public void updateLocation(String location){
         TextView locationTV = (TextView) mFragments.get(1).getView().findViewById(R.id.chat_location_tv);
         locationTV.setText(location);
+
     }
 
     public String getLocation(){
