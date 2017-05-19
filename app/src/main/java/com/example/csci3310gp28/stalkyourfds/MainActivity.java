@@ -1,23 +1,22 @@
 package com.example.csci3310gp28.stalkyourfds;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.aprilbrother.aprilbrothersdk.Beacon;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+    private List<Fragment> mFragments;
 
     final int[] ICONS = new int[] {
             R.drawable.ic_people_black_24dp,
@@ -37,11 +37,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<Fragment> fragments = new Vector<>();
-        fragments.add(Fragment.instantiate(this, FdListFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, ChatroomFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, AccountFragment.class.getName()));
+        // Add fragments to the fragment list
+        mFragments = new Vector<>();
+        mFragments.add(Fragment.instantiate(this, FdListFragment.class.getName()));
+        mFragments.add(Fragment.instantiate(this, ChatroomFragment.class.getName()));
+        mFragments.add(Fragment.instantiate(this, AccountFragment.class.getName()));
 
+        // Set custom colors for tab icons
         ColorStateList colors;
         if (Build.VERSION.SDK_INT >= 23) {
             colors = getResources().getColorStateList(R.color.tab_icon, getTheme());
@@ -50,10 +52,12 @@ public class MainActivity extends AppCompatActivity {
             colors = getResources().getColorStateList(R.color.tab_icon);
         }
 
-        CustomPagerAdapter pageAdapter = new CustomPagerAdapter(getSupportFragmentManager(), fragments);
+        // Set ViewPager adapter
+        CustomPagerAdapter pageAdapter = new CustomPagerAdapter(getSupportFragmentManager(), mFragments);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(pageAdapter);
 
+        // Set icons with custom colors
         mTabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
         for (int i=0; i<mTabLayout.getTabCount(); i++) {
@@ -65,6 +69,44 @@ public class MainActivity extends AppCompatActivity {
                 DrawableCompat.setTintList(icon, colors);
             }
         }
+
+        // Grant permission before detecting beacons
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+        while (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        }
+
+        // Update current location to server
+        CallbackInterface cbi = new CallbackInterface() {
+            @Override
+            public void onRanged(ArrayList<Beacon> beacons) {
+                int id = -1;
+                for(int i = 0;i < beacons.size();i++){
+                    Beacon b = beacons.get(i);
+                    if(b.getDistance() < 10){
+                        if(b.getName().equals("abeacon_C775")){
+                            updateLocation("SHB 123");
+                        }else if(b.getName().equals("abeacon_C7FC")){
+                            updateLocation("SHB 924");
+                        }else{
+                            updateLocation("Outside lab");
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onEntered(ArrayList<Beacon> beacons) {
+            }
+
+            @Override
+            public void onExit() {
+            }
+        };
+        BeaconController bc = new BeaconController(this,cbi);
+        bc.connectToService();
 
 //        viewPager = (ViewPager) findViewById(R.id.viewPager);
 //        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
@@ -83,5 +125,14 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //
 //        viewPager.setCurrentItem(1);
+    }
+
+    /**
+     * Update the current location to database.
+     * @param location of the user
+     */
+    public void updateLocation(String location){
+        TextView locationTV = (TextView) mFragments.get(1).getView().findViewById(R.id.chat_location_tv);
+        locationTV.setText(location);
     }
 }
