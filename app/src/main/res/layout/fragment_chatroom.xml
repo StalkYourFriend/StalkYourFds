@@ -3,39 +3,37 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="@dimen/activity_horizontal_margin"
         android:id="@+id/relativeLayout">
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/new_message"
-            android:textSize="10sp"
-            android:layout_centerVertical="true"
-            android:layout_alignEnd="@+id/sender">
+            android:layout_weight="1"
+            android:id="@+id/new_message">
             <requestFocus />
         </EditText>
 
         <Button
-            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0"
             android:text="Send"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
             android:id="@+id/sendButton"
-            android:gravity="end"
-            android:onClick="publish"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
+            android:onClick="publish" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/message_list"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_below="@+id/relativeLayout" />
+        android:layout_below="@+id/relativeLayout"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
 </RelativeLayout>

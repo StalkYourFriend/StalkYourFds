@@ -79,10 +79,10 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.chat_main);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Pub/Sub"));
-        tabLayout.addTab(tabLayout.newTab().setText("Presence"));
-        tabLayout.addTab(tabLayout.newTab().setText("Multi"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.addTab(tabLayout.newTab().setText("Chatroom"));
+        //tabLayout.addTab(tabLayout.newTab().setText("Presence"));
+        //tabLayout.addTab(tabLayout.newTab().setText("Multi"));
+        //tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final MainActivityTabManager adapter = new MainActivityTabManager
@@ -146,6 +146,10 @@ public class ChatActivity extends AppCompatActivity {
 
     public void publish(View view) {
         final EditText mMessage = (EditText) ChatActivity.this.findViewById(R.id.new_message);
+
+        if (mMessage.getText().toString().equals("")) {
+            return;
+        }
 
         final Map<String, String> message = ImmutableMap.<String, String>of("sender", ChatActivity.this.mUsername, "message", mMessage.getText().toString(), "timestamp", DateTimeUtil.getTimeStampUtc());
 
