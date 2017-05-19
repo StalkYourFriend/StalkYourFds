@@ -86,7 +86,7 @@ public class FdListFragment extends Fragment {
 
         // TODO replace TEMP dummy friend list with the actual one
         fds = new ArrayList<>();
-        fds.add(new Friend("Aaron", "", "SHB 123"));
+        fds.add(new Friend("Aaron", null, "SHB 123"));
         fds.add(new Friend("Energy", null, "SHB 123"));
         fds.add(new Friend("Kalok", null, "SHB 123"));
         fds.add(new Friend("No", null, "SHB 123"));

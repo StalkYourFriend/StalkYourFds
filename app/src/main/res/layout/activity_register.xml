@@ -46,11 +46,12 @@
             android:id="@+id/register_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary"
+            android:onClick="onRegisterBtnClick"
+            android:padding="16dp"
             android:text="Register"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:backgroundTint="@color/primary"
-            android:padding="16dp"
-            android:textColor="@color/icons"/>
+            android:textColor="@color/icons" />
 
     </LinearLayout>
 </ScrollView>
