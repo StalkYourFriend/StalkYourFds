@@ -69,4 +69,9 @@ public class BeaconController {
             }
         });
     }
+
+    public Beacon getClosestBeacon(ArrayList<Beacon> beacons){
+        Collections.sort(beacons,new BeaconComparator());
+        return beacons.get(0);
+    }
 }
