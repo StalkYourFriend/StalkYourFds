@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // TEMPORARY Go to stalk screen
+        // TEMPORARY Go to main screen
         loginBtn = (Button) findViewById(R.id.login_btn);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
