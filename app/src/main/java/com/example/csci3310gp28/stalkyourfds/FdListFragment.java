@@ -3,6 +3,7 @@ package com.example.csci3310gp28.stalkyourfds;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -119,6 +120,7 @@ public class FdListFragment extends Fragment {
         inflater.inflate(R.menu.main, menu);
         // Set menu item to have white color
         setMenuItemColor(menu, R.id.menu_add, Color.WHITE);
+        setMenuItemColor(menu, R.id.menu_chat, Color.WHITE);
         super.onCreateOptionsMenu(menu,inflater);
     }
 
@@ -130,6 +132,9 @@ public class FdListFragment extends Fragment {
                 AlertDialog.Builder addFdDialog = buildAddFdDialog();
                 addFdDialog.show();
                 return true;
+            case R.id.menu_chat:
+                Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
+                startActivity(chatIntent);
             default:
                 return super.onOptionsItemSelected(item);
         }

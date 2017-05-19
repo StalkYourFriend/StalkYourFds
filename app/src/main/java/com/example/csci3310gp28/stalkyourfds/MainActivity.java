@@ -1,5 +1,6 @@
 package com.example.csci3310gp28.stalkyourfds;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     final int[] ICONS = new int[] {
             R.drawable.ic_people_black_24dp,
-            R.drawable.ic_chat_black_24dp,
+            //R.drawable.ic_chat_black_24dp,
             R.drawable.ic_person_black_24dp
     };
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<Fragment> fragments = new Vector<>();
         fragments.add(Fragment.instantiate(this, FdListFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, ChatroomFragment.class.getName()));
+        //fragments.add(Fragment.instantiate(this, ChatroomFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, AccountFragment.class.getName()));
 
         ColorStateList colors;

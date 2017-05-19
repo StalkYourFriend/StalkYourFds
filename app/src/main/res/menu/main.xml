@@ -6,4 +6,9 @@
         android:title="Add friend"
         android:icon="@drawable/ic_person_add_black_24dp"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_chat"
+        android:title="Chatroom"
+        android:icon="@drawable/ic_chat_black_24dp"
+        app:showAsAction="ifRoom" />
 </menu>
