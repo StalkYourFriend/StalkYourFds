@@ -10,6 +10,7 @@
     tools:context="com.example.csci3310gp28.stalkyourfds.ChatroomFragment">
 
     <TextView
+        android:id="@+id/chat_location_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
@@ -17,7 +18,8 @@
         style="?android:attr/textAppearanceLarge"
         android:textStyle="bold"
         android:textColor="@color/primary_text"
-        android:text="SHB 123" />
+        android:hint="Location"
+        android:text="Location not found"/>
 
     <ListView
         android:layout_width="match_parent"
