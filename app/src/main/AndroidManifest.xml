@@ -29,6 +29,7 @@
         <activity android:name=".ChatActivity"></activity>
         <activity android:name=".FdListActivity"></activity>
         <activity android:name=".MainActivity"></activity>
+>>>>>>>>> Temporary merge branch 2
     </application>
 
 </manifest>
