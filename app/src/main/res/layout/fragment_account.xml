@@ -5,25 +5,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.csci3310gp28.stalkyourfds.RegisterActivity">
-
+    tools:context="com.example.csci3310gp28.stalkyourfds.AccountFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/register_username_et"
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@color/accent"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <TextView
+            android:id="@+id/ac_username_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/primary_text"
+            android:textAlignment="center"
+            android:paddingTop="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textAppearance="?android:textAppearanceMedium"
             android:hint="Username"/>
 
         <EditText
-            android:id="@+id/register_password_et"
+            android:id="@+id/ac_password_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -31,10 +39,10 @@
             android:padding="16dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/primary_text"
-            android:hint="Password"/>
+            android:hint="New password"/>
 
         <EditText
-            android:id="@+id/register_icon_et"
+            android:id="@+id/ac_icon_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
@@ -43,12 +51,22 @@
             android:hint="Profile picture URL"/>
 
         <Button
-            android:id="@+id/register_btn"
+            android:id="@+id/ac_submit_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register"
+            android:text="Submit"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:backgroundTint="@color/primary"
+            android:padding="16dp"
+            android:textColor="@color/icons"/>
+
+        <Button
+            android:id="@+id/ac_logout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:backgroundTint="@color/accent"
             android:padding="16dp"
             android:textColor="@color/icons"/>
 
