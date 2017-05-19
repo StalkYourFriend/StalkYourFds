@@ -5,11 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
     TextView registerLink;
+    EditText username;
     Button loginBtn;
 
     @Override
@@ -29,10 +31,12 @@ public class LoginActivity extends AppCompatActivity {
 
         // TEMPORARY Go to main screen
         loginBtn = (Button) findViewById(R.id.login_btn);
+        username = (EditText) findViewById(R.id.login_username_et);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                loginIntent.putExtra("username", username.getText().toString());
                 startActivity(loginIntent);
             }
         });
