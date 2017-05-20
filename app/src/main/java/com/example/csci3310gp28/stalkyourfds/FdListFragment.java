@@ -125,7 +125,7 @@ public class FdListFragment extends Fragment {
                         Log.d(this.getClass().getSimpleName(), "Response: " + response.toString());
                         //display successful msg
                         Context context = getActivity().getApplicationContext();
-                        CharSequence text = "Successfully loaded friends!";
+                        CharSequence text = "Successfully loaded friend list!";
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
@@ -189,6 +189,7 @@ public class FdListFragment extends Fragment {
         inflater.inflate(R.menu.main, menu);
         // Set menu item to have white color
         setMenuItemColor(menu, R.id.menu_add, Color.WHITE);
+        setMenuItemColor(menu, R.id.menu_refresh, Color.WHITE);
         setMenuItemColor(menu, R.id.menu_chat, Color.WHITE);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -200,6 +201,10 @@ public class FdListFragment extends Fragment {
                 //Toast.makeText(getActivity(), "Add friend", Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder addFdDialog = buildAddFdDialog();
                 addFdDialog.show();
+                return true;
+            case R.id.menu_refresh:
+                Toast.makeText(getActivity(), "Refreshing", Toast.LENGTH_SHORT).show();
+                updateFriendList();
                 return true;
             case R.id.menu_chat:
                 if(Constants.location.equals("SHB924") || Constants.location.equals("SHB123")) {

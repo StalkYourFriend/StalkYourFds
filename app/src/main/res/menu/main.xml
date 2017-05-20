@@ -2,13 +2,18 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_refresh"
+        android:icon="@drawable/ic_refresh_black_24dp"
+        android:title="Refresh"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/menu_add"
         android:title="Add friend"
         android:icon="@drawable/ic_person_add_black_24dp"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_chat"
-        android:title="Chatroom"
         android:icon="@drawable/ic_chat_black_24dp"
-        app:showAsAction="ifRoom" />
+        android:title="Chatroom" />
+
 </menu>
