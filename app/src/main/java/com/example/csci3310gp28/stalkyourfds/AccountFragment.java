@@ -112,7 +112,7 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 SharedPreferences sharedPref = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
                 long id = sharedPref.getLong("id", 1);
-                String url = "http://5d8ba069.ngrok.io/users/" + id;
+                String url = "http://104.198.103.187:3000/users/" + id;
                 JSONObject request = new JSONObject();
                 try {
                     request.put("data",

@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String username = ((TextView) findViewById(R.id.register_username_et)).getText().toString();
         String password = ((TextView) findViewById(R.id.register_password_et)).getText().toString();
         String icon = ((TextView) findViewById(R.id.register_icon_et)).getText().toString();
-        String url = "http://5d8ba069.ngrok.io/users";
+        String url = "http://104.198.103.187:3000/users";
         JSONObject request = new JSONObject();
         try {
             request.put("data",

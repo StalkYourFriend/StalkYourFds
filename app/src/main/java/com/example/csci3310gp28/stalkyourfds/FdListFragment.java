@@ -114,7 +114,7 @@ public class FdListFragment extends Fragment {
         SharedPreferences sharedPref = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
 
         long id = sharedPref.getLong("id", 1);
-        String url = "http://5d8ba069.ngrok.io/users/" + id + "/friends";
+        String url = "http://104.198.103.187:3000/users/" + id + "/friends";
         JSONObject request = new JSONObject();
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
@@ -268,7 +268,7 @@ public class FdListFragment extends Fragment {
                 
                 SharedPreferences sharedPref = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
                 long id = sharedPref.getLong("id", 1);
-                String url = "http://5d8ba069.ngrok.io/users/" + id + "/addfriendbyname";
+                String url = "http://104.198.103.187:3000/users/" + id + "/addfriendbyname";
                 JSONObject request = new JSONObject();
                 try {
                     request.put("data",
