@@ -80,14 +80,17 @@ public class LoginActivity extends AppCompatActivity {
 
                                 // We need an Editor object to make preference changes.
                                 // All objects are from android.context.Context
-                                SharedPreferences settings = getSharedPreferences("user",MODE_PRIVATE);
+                                SharedPreferences settings = getSharedPreferences("user", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("username", username);
 
                                 long id;
+                                String icon = "";
                                 try {
-                                    id=response.getJSONObject("data").getLong("id");
+                                    id = response.getJSONObject("data").getLong("id");
+                                    icon = response.getJSONObject("data").getJSONObject("attributes").getString("icon");
                                     editor.putLong("id", id);
+                                    editor.putString("icon", icon);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

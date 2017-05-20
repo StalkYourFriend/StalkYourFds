@@ -261,8 +261,8 @@ public class FdListFragment extends Fragment {
                 // Possible results: Successfully added, already added, failed to add
                 String resultText = "Adding " + addFdEditText.getText().toString();
                 Toast.makeText(getActivity(), resultText, Toast.LENGTH_LONG).show();
+                
                 SharedPreferences sharedPref = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-
                 long id = sharedPref.getLong("id", 1);
                 String url = "http://5d8ba069.ngrok.io/users/" + id + "/addfriendbyname";
                 JSONObject request = new JSONObject();
