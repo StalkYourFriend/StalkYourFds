@@ -207,9 +207,13 @@ public class FdListFragment extends Fragment {
                 updateFriendList();
                 return true;
             case R.id.menu_chat:
-                Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
-                chatIntent.putExtra("username", getActivity().getIntent().getExtras().getString("username"));
-                startActivity(chatIntent);
+                if(Constants.location.equals("SHB924") || Constants.location.equals("SHB123")) {
+                    Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
+                    chatIntent.putExtra("username", getActivity().getIntent().getExtras().getString("username"));
+                    startActivity(chatIntent);
+                }else{
+                    Toast.makeText(getActivity(),"Your are outside the lab",Toast.LENGTH_SHORT).show();
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

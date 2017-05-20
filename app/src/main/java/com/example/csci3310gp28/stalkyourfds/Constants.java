@@ -9,4 +9,6 @@ public class Constants {
 
     public static final String DATASTREAM_PREFS = "com.example.csci3310gp28.stalkyourfds.DATASTREAM_PREFS";
     public static final String DATASTREAM_UUID = "com.example.csci3310gp28.stalkyourfds.DATASTREAM_UUID";
+
+    public static String location = "";
 }

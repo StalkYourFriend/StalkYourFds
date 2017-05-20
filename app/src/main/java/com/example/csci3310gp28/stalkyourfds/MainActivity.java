@@ -174,7 +174,9 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param location of the user
      */
+
     public void updateLocation(String location) {
+        Constants.location = location;
         View temp = mFragments.get(1).getView();
         TextView locationTV = null;
         if (temp != null) {
@@ -232,7 +234,6 @@ public class MainActivity extends AppCompatActivity {
                 });
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsObjRequest);
-
     }
 
     public String getLocation() {
