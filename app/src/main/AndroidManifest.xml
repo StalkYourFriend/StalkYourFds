@@ -30,6 +30,8 @@
             android:name=".RegisterActivity"
             android:label="Register"
             android:parentActivityName=".LoginActivity" />
+        <activity android:name=".ChatActivity"></activity>
+        <!--<activity android:name=".FdListActivity"></activity>-->
         <activity android:name=".MainActivity"></activity>
 
         <service

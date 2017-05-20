@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         // We need an Editor object to make preference changes.
                         // All objects are from android.context.Context
-                        SharedPreferences settings = getPreferences(MODE_PRIVATE);
+                        SharedPreferences settings = getSharedPreferences("user",MODE_PRIVATE);
                         SharedPreferences.Editor editor = settings.edit();
                         editor.putString("username", username);
 

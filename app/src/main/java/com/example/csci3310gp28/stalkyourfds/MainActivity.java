@@ -1,5 +1,6 @@
 package com.example.csci3310gp28.stalkyourfds;
 
+import android.content.Intent;
 import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     final int[] ICONS = new int[]{
             R.drawable.ic_people_black_24dp,
-            R.drawable.ic_chat_black_24dp,
+            //R.drawable.ic_chat_black_24dp,
             R.drawable.ic_person_black_24dp
     };
 
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         // Add fragments to the fragment list
         mFragments = new Vector<>();
         mFragments.add(Fragment.instantiate(this, FdListFragment.class.getName()));
-        mFragments.add(Fragment.instantiate(this, ChatroomFragment.class.getName()));
+        //mFragments.add(Fragment.instantiate(this, ChatroomFragment.class.getName()));
         mFragments.add(Fragment.instantiate(this, AccountFragment.class.getName()));
 
         // Set custom colors for tab icons
@@ -178,13 +179,13 @@ public class MainActivity extends AppCompatActivity {
         View temp = mFragments.get(1).getView();
         TextView locationTV = null;
         if (temp != null) {
-             locationTV = (TextView) temp.findViewById(R.id.chat_location_tv);
-            locationTV.setText(location);
+//             locationTV = (TextView) temp.findViewById(R.id.chat_location_tv);
+//            locationTV.setText(location);
 
         }
 
 
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("user",Context.MODE_PRIVATE);
 
         long id = sharedPref.getLong("id", 1);
         String url = "http://5d8ba069.ngrok.io/users/" + id;

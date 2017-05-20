@@ -8,7 +8,8 @@ import java.util.List;
 
 public class CustomPagerAdapter extends FragmentPagerAdapter {
 
-    private final String[] tabTitles = {"Friends", "Chatroom", "Account"};
+    //private final String[] tabTitles = {"Friends", "Chatroom", "Account"};
+    private final String[] tabTitles = {"Friends", "Account"};
 
     private List<Fragment> mFragments;
 
