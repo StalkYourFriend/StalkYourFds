@@ -68,7 +68,7 @@ public class ChatActivity extends AppCompatActivity {
 
         mSharedPrefs = getSharedPreferences(Constants.DATASTREAM_PREFS, MODE_PRIVATE);
 
-        this.mUsername = mSharedPrefs.getString(Constants.DATASTREAM_UUID, "");
+        this.mUsername = this.getIntent().getExtras().getString("username");
         this.mPubSub = new PubSubListAdapter(this);
         this.mPresence = new PresenceListAdapter(this);
         this.mMulti = new MultiListAdapter(this);

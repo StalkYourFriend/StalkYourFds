@@ -134,6 +134,7 @@ public class FdListFragment extends Fragment {
                 return true;
             case R.id.menu_chat:
                 Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
+                chatIntent.putExtra("username", getActivity().getIntent().getExtras().getString("username"));
                 startActivity(chatIntent);
             default:
                 return super.onOptionsItemSelected(item);
