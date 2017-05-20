@@ -68,6 +68,7 @@ public class ChatroomFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_chatroom, container, false);
 
         // Indicate the Location TextView
+        mLocation = (TextView) rootView.findViewById(R.id.chat_location_tv);
         return rootView;
     }
 

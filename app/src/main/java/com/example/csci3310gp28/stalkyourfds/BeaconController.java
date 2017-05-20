@@ -1,4 +1,4 @@
-package com.example.kalok.testbeacon;
+package com.example.csci3310gp28.stalkyourfds;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -68,5 +68,10 @@ public class BeaconController {
                 }
             }
         });
+    }
+
+    public Beacon getClosestBeacon(ArrayList<Beacon> beacons){
+        Collections.sort(beacons,new BeaconComparator());
+        return beacons.get(0);
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
@@ -17,6 +18,9 @@ import android.widget.Button;
 public class AccountFragment extends Fragment {
 
     private static final String TAG = AccountFragment.class.getSimpleName();
+
+    private String username;
+    private TextView usernameTV;
 
     private Button logoutBtn;
 
@@ -75,6 +79,10 @@ public class AccountFragment extends Fragment {
                 getActivity().finish();
             }
         });
+
+        username = getActivity().getIntent().getExtras().getString("username");
+        usernameTV = (TextView) rootView.findViewById(R.id.ac_username_tv);
+        usernameTV.setText(username);
 
         return rootView;
     }
