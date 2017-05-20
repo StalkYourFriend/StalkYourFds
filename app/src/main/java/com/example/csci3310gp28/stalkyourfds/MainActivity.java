@@ -178,8 +178,8 @@ public class MainActivity extends AppCompatActivity {
         View temp = mFragments.get(1).getView();
         TextView locationTV = null;
         if (temp != null) {
-             locationTV = (TextView) temp.findViewById(R.id.chat_location_tv);
-            locationTV.setText(location);
+//             locationTV = (TextView) temp.findViewById(R.id.chat_location_tv);
+//            locationTV.setText(location);
 
         }
 
