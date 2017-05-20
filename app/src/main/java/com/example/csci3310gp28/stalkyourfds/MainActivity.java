@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void updateLocation(String location) {
+        Constants.location = location;
         View temp = mFragments.get(1).getView();
         TextView locationTV = null;
         if (temp != null) {

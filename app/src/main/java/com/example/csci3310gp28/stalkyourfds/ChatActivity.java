@@ -79,7 +79,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.chat_main);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Chatroom"));
+        tabLayout.addTab(tabLayout.newTab().setText(Constants.location));
         //tabLayout.addTab(tabLayout.newTab().setText("Presence"));
         //tabLayout.addTab(tabLayout.newTab().setText("Multi"));
         //tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
