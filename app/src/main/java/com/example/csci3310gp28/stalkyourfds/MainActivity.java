@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("user",Context.MODE_PRIVATE);
 
         long id = sharedPref.getLong("id", 1);
         String url = "http://5d8ba069.ngrok.io/users/" + id;

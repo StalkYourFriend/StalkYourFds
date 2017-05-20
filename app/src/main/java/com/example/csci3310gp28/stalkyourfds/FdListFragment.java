@@ -105,7 +105,7 @@ public class FdListFragment extends Fragment {
 //        final String username = ((TextView) findViewById(R.id.register_username_et)).getText().toString();
 //        String password = ((TextView) findViewById(R.id.register_password_et)).getText().toString();
 //        String icon = ((TextView) findViewById(R.id.register_icon_et)).getText().toString();
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("user",Context.MODE_PRIVATE);
 
         long id = sharedPref.getLong("id", 1);
         String url = "http://5d8ba069.ngrok.io/users/" + id + "/friends";
