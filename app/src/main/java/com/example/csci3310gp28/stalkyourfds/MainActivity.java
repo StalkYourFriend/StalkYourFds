@@ -1,5 +1,6 @@
 package com.example.csci3310gp28.stalkyourfds;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.Manifest;
 import android.content.Context;
@@ -95,57 +96,63 @@ public class MainActivity extends AppCompatActivity {
         }
 
         try {
-            // Update current location to server
-            CallbackInterface cbi = new CallbackInterface() {
-                @Override
-                public void onRanged(ArrayList<Beacon> beacons) {
-                    /*int id = -1;
-                    for(int i = 0;i < beacons.size();i++){
-                        Beacon b = beacons.get(i);
-                        if(b.getDistance() < 10){
-                            if(b.getName().equals("abeacon_C775")){
-                                updateLocation("SHB 123");
-                            }else if(b.getName().equals("abeacon_C7FC")){
-                                updateLocation("SHB 924");
-                            }else{
-                                updateLocation("Outside lab");
+            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+            if (bluetoothAdapter != null) {
+                // Update current location to server
+                CallbackInterface cbi = new CallbackInterface() {
+                    @Override
+                    public void onRanged(ArrayList<Beacon> beacons) {
+                        /*int id = -1;
+                        for(int i = 0;i < beacons.size();i++){
+                            Beacon b = beacons.get(i);
+                            if(b.getDistance() < 10){
+                                if(b.getName().equals("abeacon_C775")){
+                                    updateLocation("SHB 123");
+                                }else if(b.getName().equals("abeacon_C7FC")){
+                                    updateLocation("SHB 924");
+                                }else{
+                                    updateLocation("Outside lab");
+                                }
                             }
-                        }
-                    }*/
-                    location = "";
-                    if (beacons.size() > 0) {
-                        Beacon nearestBeacon = bc.getClosestBeacon(beacons);
-                        if (nearestBeacon.getDistance() < 10) {
-                            if (nearestBeacon.getName().equals("abeacon_C775")) {
-                                location = "SHB123";
-                            } else if (nearestBeacon.getName().equals("abeacon_C7FC")) {
-                                location = "SHB924";
+                        }*/
+                        location = "";
+                        if (beacons.size() > 0) {
+                            Beacon nearestBeacon = bc.getClosestBeacon(beacons);
+                            if (nearestBeacon.getDistance() < 10) {
+                                if (nearestBeacon.getName().equals("abeacon_C775")) {
+                                    location = "SHB123";
+                                } else if (nearestBeacon.getName().equals("abeacon_C7FC")) {
+                                    location = "SHB924";
+                                } else {
+                                    location = "Outside Lab";
+                                }
                             } else {
                                 location = "Outside Lab";
                             }
                         } else {
                             location = "Outside Lab";
                         }
-                    } else {
-                        location = "Outside Lab";
+                        if (!location.equals(lastLocation)) {
+                            lastLocation = location;
+                            updateLocation(location);
+
+                        }
                     }
-                    if (!location.equals(lastLocation)) {
-                        lastLocation = location;
-                        updateLocation(location);
 
+                    @Override
+                    public void onEntered(ArrayList<Beacon> beacons) {
                     }
-                }
 
-                @Override
-                public void onEntered(ArrayList<Beacon> beacons) {
-                }
-
-                @Override
-                public void onExit() {
-                }
-            };
-            bc = new BeaconController(this, cbi);
-            bc.connectToService();
+                    @Override
+                    public void onExit() {
+                    }
+                };
+                bc = new BeaconController(this, cbi);
+                bc.connectToService();
+            } else {
+                Toast.makeText(getApplicationContext(), "No bluetooth device detected!", Toast.LENGTH_SHORT).show();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
