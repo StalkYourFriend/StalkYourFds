@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
     private List<Fragment> mFragments;
     private BeaconController bc;
-    private String location;
+    private String location="";
     private String lastLocation = "";
 
     final int[] ICONS = new int[]{
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         // Add fragments to the fragment list
         mFragments = new Vector<>();
@@ -152,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
                 bc.connectToService();
             } else {
                 Toast.makeText(getApplicationContext(), "No bluetooth device detected!", Toast.LENGTH_SHORT).show();
+                location = "Outside Lab";
+                updateLocation(location);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,6 +177,10 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //
 //        viewPager.setCurrentItem(1);
+
+        //set to be outside lab by default
+        location = "Outside Lab";
+        updateLocation(location);
     }
 
     /**
@@ -184,13 +191,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateLocation(String location) {
         Constants.location = location;
-        View temp = mFragments.get(1).getView();
-        TextView locationTV = null;
-        if (temp != null) {
-//             locationTV = (TextView) temp.findViewById(R.id.chat_location_tv);
-//            locationTV.setText(location);
-
-        }
+//        View temp = mFragments.get(1).getView();
+//        TextView locationTV = null;
+//        if (temp != null) {
+////             locationTV = (TextView) temp.findViewById(R.id.chat_location_tv);
+////            locationTV.setText(location);
+//
+//        }
 
 
         SharedPreferences sharedPref = getSharedPreferences("user",Context.MODE_PRIVATE);

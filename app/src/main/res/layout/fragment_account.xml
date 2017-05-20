@@ -30,17 +30,15 @@
             android:textAppearance="?android:textAppearanceMedium"
             android:hint="Username"/>
 
-        <EditText
-            android:id="@+id/ac_password_et"
+        <TextView
+            android:id="@+id/ac_icon_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:hint="New password"
-            android:inputType="textPassword"
+            android:text="New Profile Picture URL:"
             android:padding="16dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/primary_text"
-            android:visibility="invisible" />
+            android:textColor="@color/primary_text" />
 
         <EditText
             android:id="@+id/ac_icon_et"

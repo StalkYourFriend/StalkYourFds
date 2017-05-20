@@ -213,6 +213,9 @@ public class FdListFragment extends Fragment {
                     startActivity(chatIntent);
                 }else{
                     Toast.makeText(getActivity(),"Your are outside the lab",Toast.LENGTH_SHORT).show();
+                    Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
+                    chatIntent.putExtra("username", getActivity().getIntent().getExtras().getString("username"));
+                    startActivity(chatIntent);
                 }
             default:
                 return super.onOptionsItemSelected(item);
