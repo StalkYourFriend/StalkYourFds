@@ -105,7 +105,13 @@ public class FdListFragment extends Fragment {
 //        final String username = ((TextView) findViewById(R.id.register_username_et)).getText().toString();
 //        String password = ((TextView) findViewById(R.id.register_password_et)).getText().toString();
 //        String icon = ((TextView) findViewById(R.id.register_icon_et)).getText().toString();
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("user",Context.MODE_PRIVATE);
+        updateFriendList();
+
+
+    }
+
+    private void updateFriendList() {
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
 
         long id = sharedPref.getLong("id", 1);
         String url = "http://5d8ba069.ngrok.io/users/" + id + "/friends";
@@ -123,6 +129,7 @@ public class FdListFragment extends Fragment {
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
+                        fds.clear();
                         try {
                             for (int i = 0; i < response.getJSONArray("data").length(); i++) {
                                 String name = response.getJSONArray("data").getJSONObject(i).getJSONObject("attributes").getString("full-name");
@@ -155,8 +162,6 @@ public class FdListFragment extends Fragment {
                 });
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
-
-
     }
 
     @Override
@@ -185,7 +190,7 @@ public class FdListFragment extends Fragment {
         // Set menu item to have white color
         setMenuItemColor(menu, R.id.menu_add, Color.WHITE);
         setMenuItemColor(menu, R.id.menu_chat, Color.WHITE);
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -207,8 +212,9 @@ public class FdListFragment extends Fragment {
 
     /**
      * Set color for the specified menu item.
-     * @param menu is the menu the item is located at
-     * @param res is the resource ID of the menu item
+     *
+     * @param menu  is the menu the item is located at
+     * @param res   is the resource ID of the menu item
      * @param color is the color of the item
      */
     private void setMenuItemColor(Menu menu, int res, int color) {
@@ -250,6 +256,56 @@ public class FdListFragment extends Fragment {
                 // Possible results: Successfully added, already added, failed to add
                 String resultText = "Adding " + addFdEditText.getText().toString();
                 Toast.makeText(getActivity(), resultText, Toast.LENGTH_LONG).show();
+                SharedPreferences sharedPref = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+
+                long id = sharedPref.getLong("id", 1);
+                String url = "http://5d8ba069.ngrok.io/users/" + id + "/addfriendbyname";
+                JSONObject request = new JSONObject();
+                try {
+                    request.put("data",
+                            new JSONObject()
+                                    .put("attributes",
+                                            new JSONObject()
+                                                    .put("full-name", addFdEditText.getText().toString())
+
+                                    )
+                    );
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                        (Request.Method.POST, url, request, new Response.Listener<JSONObject>() {
+
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Log.d(this.getClass().getSimpleName(), "Response: " + response.toString());
+                                //display successful msg
+                                Context context = getActivity().getApplicationContext();
+                                CharSequence text = "Successfully added " + addFdEditText.getText().toString() + " as friends.";
+                                int duration = Toast.LENGTH_SHORT;
+                                Toast toast = Toast.makeText(context, text, duration);
+                                toast.show();
+                                updateFriendList();
+
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                //display failed msg
+                                Context context = getActivity().getApplicationContext();
+                                CharSequence text = "Failed to add friends: " + new String(error.networkResponse.data) + "(" + error.networkResponse.statusCode + ")";
+                                int duration = Toast.LENGTH_SHORT;
+                                Toast toast = Toast.makeText(context, text, duration);
+                                toast.show();
+                                updateFriendList();
+
+
+                            }
+                        });
+                // Access the RequestQueue through your singleton class.
+                MySingleton.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
             }
         });
         dialog.setNegativeButton("Cancel", null);
